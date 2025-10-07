@@ -1,91 +1,131 @@
+/* 🌈 Font dan dasar */
 body {
-            background-color: #ffffff; /* Background lebih gelap */
-            font-family: 'Poppins', sans-serif; /* Font modern Poppins */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            min-height: 100vh;
-            margin: 0;
-            box-sizing: border-box;
-            text-align: center;
-        }
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #b8c7ff, #d1b8ff);
+  color: #121212;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.8s ease, color 0.8s ease;
+}
 
-        .card {
-            background-color: #ffffff;
-            padding: 20px;
-            border: 1px solid #bfeaff; /* Border jingga ke kuningan */
-            border-radius: 10px;
-            width: 100%;
-            max-width: 500px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow lebih gelap */
-            backdrop-filter: blur(10px); /* Blur lebih kuat */
-            position: relative; /* Untuk positioning spinner */
-        }
+/* 🌗 Mode Gelap Otomatis */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(135deg, #1a1a2e, #3a0ca3);
+    color: #ffffff;
+  }
 
-        h1, p {
-            color: #0057ff; /* Warna font jingga ke kuningan */
-            margin-bottom: 20px;
-        }
+  input {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
 
-        input[type="text"] {
-            padding: 10px;
-            font-size: 16px;
-            border: 2px solid #0057ff; /* Border input */
-            border-radius: 200px;
-            text-align: center;
-            width: 80%;
-            margin-bottom: 20px;
-            background-color: transparent;
-            color: #000000;
-        }
+  input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
 
-        button {
-            background-color: #0057ff;
-            color: #ffffff;
-            padding: 10px 25px;
-            font-size: 16px;
-            border: none;
-            border-radius: 200px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
-        }
+  button {
+    background: linear-gradient(135deg, #3a0ca3, #7209b7);
+    color: #fff;
+  }
 
-        button:hover {
-            background-color: #0057ff;
-            transform: translateY(-3px); /* Efek naik saat hover */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Shadow lebih dalam saat hover */
-        }
+  button:hover {
+    background: linear-gradient(135deg, #560bad, #b5179e);
+  }
 
-        .footer {
-            color: #0057ff;
-            font-weight: bold;
-            position: absolute;
-            bottom: 10px;
-            width: 100%;
-            text-align: center;
-        }
+  .card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+}
 
-        #result {
-            display: none;
-        }
+/* ☀️ Mode Terang */
+.card {
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
 
-        .loading-spinner {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top: 4px solid #FFA500; /* Warna jingga ke kuningan */
-            width: 40px;
-            height: 40px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-top: -20px; /* Setengah dari tinggi */
-            margin-left: -20px; /* Setengah dari lebar */
-            animation: spin 1s linear infinite;
-        }
+h1 {
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+p {
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  outline: none;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+  color: #121212;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+input:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 8px rgba(108, 99, 255, 0.4);
+}
+
+button {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #6c63ff, #a36cff);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.4);
+}
+
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top: 3px solid #6c63ff;
+  border-radius: 50%;
+  margin: 10px auto;
+  animation: spin 1s linear infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+  .loading-spinner {
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top: 3px solid #a36cff;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.footer {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
