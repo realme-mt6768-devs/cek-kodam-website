@@ -7,11 +7,12 @@
     <title>Cek Khodam</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body.dark-mode {
-            background: #0d0d0d;
+            background-color: #0d0d0d;
             color: #fff;
-            transition: background 1.2s ease, color 1.2s ease;
+            transition: background-color 1.2s ease, color 1.2s ease;
         }
 
         .not-found {
@@ -19,9 +20,9 @@
             font-weight: 700;
             color: #ff0044;
             text-align: center;
-            margin-top: 60px;
+            margin-top: 100px;
             opacity: 0;
-            animation: fadeIn 1.5s forwards;
+            animation: fadeIn 1.2s forwards;
         }
 
         @keyframes fadeIn {
@@ -36,63 +37,86 @@
     <div class="card">
         <h1>Cek Khodam</h1>
         <p>Masukkan nama untuk mengetahui khodam dan pesan rahasianya</p>
-        <input type="text" id="nameInput" placeholder="Ketik nama kamu di sini">
+        <input type="text" id="nameInput" placeholder="Ketik nama kamu di sini...">
         <button onclick="cekKhodam()">Cek Khodam</button>
         <div id="loading" class="loading-spinner" style="display: none;"></div>
 
         <div id="result">
             <h2 id="khodamName"></h2>
-            <p id="khodamQuote" style="font-style: italic;"></p>
+            <p id="khodamMeaning" style="font-style: italic;"></p>
         </div>
     </div>
 
     <div class="footer">© 2025 <a style="color:#0057ff; text-decoration:none;">rulxyz</a></div>
 
     <script>
-        async function cekKhodam() {
+        function cekKhodam() {
             const nameInput = document.getElementById('nameInput').value.trim();
             const result = document.getElementById('result');
             const loading = document.getElementById('loading');
             const khodamName = document.getElementById('khodamName');
-            const khodamQuote = document.getElementById('khodamQuote');
+            const khodamMeaning = document.getElementById('khodamMeaning');
 
-            // Easter Egg untuk nama CumaRull
+            // Easter Egg: CumaRull
             if (nameInput.toLowerCase() === 'cumarull') {
                 document.body.classList.add('dark-mode');
-                document.body.innerHTML = '<div class=\"not-found\">404 Not Found</div>';
+                document.body.innerHTML = '<div class="not-found">404 Not Found</div>';
                 return;
             }
 
             document.body.classList.remove('dark-mode');
-            result.style.display = "none";
-            loading.style.display = "block";
 
             if (!nameInput) {
-                alert("Nama tidak boleh kosong!");
-                loading.style.display = "none";
+                Swal.fire({
+                    title: 'Nama tidak boleh kosong!',
+                    icon: 'warning',
+                    confirmButtonColor: '#6c63ff',
+                    confirmButtonText: 'OK',
+                    background: '#1e1e2f',
+                    color: '#fff',
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                });
                 return;
             }
 
-            try {
-                // Ambil kata random dari internet
-                const wordResponse = await fetch('https://random-word-api.herokuapp.com/word?number=1');
-                const wordData = await wordResponse.json();
-                const randomWord = wordData[0];
+            result.style.display = "none";
+            loading.style.display = "block";
 
-                // Ambil quotes random dari internet
-                const quoteResponse = await fetch('https://api.quotable.io/random');
-                const quoteData = await quoteResponse.json();
-                const quoteText = quoteData.content;
-
-                khodamName.textContent = `Khodam: ${randomWord}`;
-                khodamQuote.textContent = `"${quoteText}"`;
-
-                result.style.display = "block";
-            } catch (error) {
-                alert("Gagal mengambil data dari internet. Periksa koneksi kamu.");
-            } finally {
+            setTimeout(() => {
                 loading.style.display = "none";
-            }
+                result.style.display = "block";
+
+                const khodamList = [
+                    "Harimau Putih", "Naga Emas", "Elang Hitam", "Macan Kumbang", "Kuda Petir",
+                    "Singa Langit", "Serigala Biru", "Burung Garuda", "Kera Sakti", "Raja Ular",
+                    "Gajah Baja", "Phoenix Api", "Kijang Mistis", "Laba-Laba Cahaya", "Ikan Dewa",
+                    "Leopard Hutan", "Burung Hantu Tua", "Rusa Emas", "Kucing Hitam", "Raja Laut"
+                ];
+
+                const quotes = [
+                    "Setiap langkah adalah awal dari kisah baru.",
+                    "Misteri selalu mengikuti mereka yang berani mencari.",
+                    "Khodam tidak dipilih, tapi hadir karena takdir.",
+                    "Keheningan adalah suara jiwa yang sesungguhnya.",
+                    "Jangan mencari khodam, temukan dirimu sendiri.",
+                    "Hanya yang ikhlas yang mampu melihat cahaya dalam gelap.",
+                    "Kekuatan sejati datang dari hati yang tenang.",
+                    "Raga bisa lemah, tapi energi tetap abadi.",
+                    "Jangan takut dengan bayangan, itu hanya tanda kamu sedang bercahaya.",
+                    "Yang tak terlihat kadang lebih nyata dari yang terlihat."
+                ];
+
+                const randomKhodam = khodamList[Math.floor(Math.random() * khodamList.length)];
+                const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
+                khodamName.textContent = `Khodam: ${randomKhodam}`;
+                khodamMeaning.textContent = `"${randomQuote}"`;
+            }, 1000);
         }
     </script>
 </body>
