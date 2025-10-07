@@ -61,6 +61,11 @@
             if (nameInput.toLowerCase() === 'cumarull') {
                 document.body.classList.add('dark-mode');
                 document.body.innerHTML = '<div class="not-found">404 Not Found</div>';
+                
+                // Durasi 4 detik sebelum kembali ke halaman semula
+                setTimeout(() => {
+                    location.reload();
+                }, 4000);
                 return;
             }
 
