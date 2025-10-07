@@ -19,7 +19,7 @@
         <div id="result">
             <h2 id="khodamName"></h2>
             <p id="khodamMeaning"></p>
-            <img id="khodamImage" src="" alt="Gambar Khodam" style="display:none; margin-top:15px; border-radius:10px; max-width:100%; height:auto;">
+            <img id="khodamImage" src="" alt="Gambar Khodam" style="display:none; margin-top:15px; border-radius:10px; max-width:100%; height:auto; animation: fadeIn 0.8s ease;">
         </div>
     </div>
 
@@ -62,8 +62,8 @@
                 khodamName.textContent = `Khodam: ${randomWord}`;
                 khodamMeaning.textContent = randomMeaning;
 
-                // Ambil gambar dari Unsplash sesuai kata random
-                const imageUrl = `https://source.unsplash.com/600x400/?${randomWord}`;
+                // Gunakan Picsum Photos agar gambar tampil di GitHub Pages
+                const imageUrl = `https://picsum.photos/seed/${encodeURIComponent(randomWord)}/600/400`;
                 khodamImage.src = imageUrl;
                 khodamImage.style.display = 'block';
 
